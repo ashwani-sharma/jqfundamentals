@@ -49,7 +49,7 @@ $('#slideshow').children('li').first().addClass('current').siblings().addClass('
 // =========== Exercise 2.3 Manipulating ============
 
 $(document).ready (function () {
-	// #1 adding five new list items to the end of the unordered list #myList
+  // #1 adding five new list items to the end of the unordered list #myList
   for(i = 0; i < 5; i++) {
   	$('<li>List Item ' + parseInt($('#myList li').length + 1) + '</li>').insertAfter($('#myList li').last());
   }
