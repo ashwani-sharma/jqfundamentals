@@ -1,52 +1,66 @@
-var InputHint = function () {
-  this.label = $('label[for="q"]');
+var CreateInputHint = function (label, searchField) {
+  this.label = label;
   this.labelValue = this.label.text();
-  this.searchField = $('input.input_text');
+  this.searchField = searchField;
 }
 
-InputHint.prototype.changeLabels = function () {
+CreateInputHint.prototype.changeLabels = function () {
   var _this = this;
 
   _this.searchField.val(_this.labelValue).addClass('hint');
   _this.label.detach();
 }
 
-InputHint.prototype.bindEvents = function () {
-  this.bindFocus();
-  this.bindBlur();
+CreateInputHint.prototype.bindEvents = function () {
+  this.initFocusEvent();
+  this.initBlurEvent();
 }
 
-InputHint.prototype.bindFocus = function () {
+CreateInputHint.prototype.initFocusEvent = function () {
   var _this = this;
 
   _this.searchField.on('focus', function () {
-    var currentInputVal = _this.searchField.val();
-
-    if(currentInputVal == _this.labelValue) {
-      _this.searchField.val('');
-      _this.searchField.removeClass('hint');
-    }
-    else {
-      _this.searchField.val(currentInputVal);
-    }
+    _this.focusEffect();
   });
 }
 
-InputHint.prototype.bindBlur = function () {
+CreateInputHint.prototype.initBlurEvent = function () {
   var _this = this;
 
   _this.searchField.on('blur', function () {
-    var currentInputVal = _this.searchField.val();
-
-    if(currentInputVal.trim() == '') {
-      _this.searchField.val(_this.labelValue);
-      _this.searchField.addClass('hint');
-    }
+    _this.blurEffect();
   });
 }
 
+CreateInputHint.prototype.focusEffect = function () {
+	var _this = this,
+      currentInputVal = _this.searchField.val();
+
+  if(currentInputVal == _this.labelValue) {
+    _this.searchField.val('');
+    _this.searchField.removeClass('hint');
+  }
+  else {
+    _this.searchField.val(currentInputVal);
+  }
+}
+
+CreateInputHint.prototype.blurEffect = function () {
+	var _this = this,
+      currentInputVal = _this.searchField.val();
+
+  if(currentInputVal.trim() == '') {
+    _this.searchField.val(_this.labelValue);
+    _this.searchField.addClass('hint');
+  }
+}
+
 $(document).ready(function () {
-  var checkResult = new InputHint();
+  label = $('label[for="q"]');
+  searchField = $('input.input_text');
+
+  var checkResult = new CreateInputHint(label, searchField);
+
   checkResult.changeLabels();
   checkResult.bindEvents();
 });
