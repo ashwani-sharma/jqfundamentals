@@ -49,8 +49,8 @@ TabbedNavigation.prototype.bindEvent = function () {
 }
 
 TabbedNavigation.prototype.showFirstTabModule = function () {
-	$('ul.tabs li:first').addClass('current');
-	$('div.module:first').show();
+  $('ul.tabs li:first').addClass('current');
+  $('div.module:first').show();
 }
 
 $(document).ready(function () {
