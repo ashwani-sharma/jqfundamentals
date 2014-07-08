@@ -38,7 +38,7 @@ CreateInputHint.prototype.focusEffect = function () {
 
   if(currentInputVal == _this.labelValue) {
     _this.searchField.val('');
-  _this.searchField.removeClass('hint');
+    _this.searchField.removeClass('hint');
   }
   else {
     _this.searchField.val(currentInputVal);
