@@ -33,12 +33,12 @@ CreateInputHint.prototype.initBlurEvent = function () {
 }
 
 CreateInputHint.prototype.focusEffect = function () {
-	var _this = this,
+  var _this = this,
       currentInputVal = _this.searchField.val();
 
   if(currentInputVal == _this.labelValue) {
     _this.searchField.val('');
-    _this.searchField.removeClass('hint');
+  _this.searchField.removeClass('hint');
   }
   else {
     _this.searchField.val(currentInputVal);
@@ -46,7 +46,7 @@ CreateInputHint.prototype.focusEffect = function () {
 }
 
 CreateInputHint.prototype.blurEffect = function () {
-	var _this = this,
+  var _this = this,
       currentInputVal = _this.searchField.val();
 
   if(currentInputVal.trim() == '') {
