@@ -4,7 +4,7 @@
 $('div.module');
 
 // #2 three selectors that use to get the third item in the #myList unordered list
-$('#myList li:eq(2)'); //indexing starts with 0 in :eq selector
+$('#myList li:eq(2)'); //indexing starts with 0 in :eq selector, this one is best
 $('#myList li:nth-child(3)'); //indexing starts with 1 in nth selector
 $('#myList li:nth-of-type(3)'); //indexing starts with 1 in nth selector
 
