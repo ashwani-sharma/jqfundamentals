@@ -51,14 +51,14 @@ $('#slideshow').children('li').first().addClass('current').siblings().addClass('
 $(document).ready (function () {
   // #1 adding five new list items to the end of the unordered list #myList
   for(i = 0; i < 5; i++) {
-    $('<li>List Item ' + parseInt($('#myList li').length + 1) + '</li>').insertAfter($('#myList li').last());
+    $('<li>List Item ' + ($('#myList li').length + 1) + '</li>').insertAfter($('#myList li:last'));
   }
 
   // #2 removing the odd list items
   $('#myList li:odd').remove();
 
   // #3 adding another h2 and another paragraph to the last div.module
-  $('div.module').last().append('<h2>Another Added Heading</h2><p>Another added paragraph</p>');
+  $('div.module:last').append('<h2>Another Added Heading</h2><p>Another added paragraph</p>');
 
   // #4 adding another option to the select element; give the option the value "Wednesday"
   $('div.module:last select option[value="tuesday"]').after('<option value="Wednesday">Wednesday</option>');
