@@ -327,3 +327,53 @@ margin: 15px 0;
 	z-index: 100;
 	
 }
+
+#container {
+	margin: 50px auto 0;
+	overflow: hidden;
+	width: 983px;
+}
+
+#container #holder {
+	border: solid 1px #eaeaea;
+	float: left;
+	padding: 0 20px 20px;
+	width: 700px;
+}
+
+#container #holder .block {
+	background: #eeeeee;
+	border: solid 1px #000;
+	cursor: pointer;
+	float: left;
+	margin-top: 10px;
+	padding: 10px 0;
+	text-align: center;
+	width: 700px;
+}
+
+#container #holder .block.highlight {
+	background: #000;
+	border: solid 1px #000;
+	color: #fff;
+	cursor: pointer;
+	float: left;
+	padding: 10px 0;
+	text-align: center;
+	width: 700px;
+}
+
+#container .button {
+	float: left;
+	margin-left: 20px;
+	width: 200px;
+}
+
+#container .button .add-row {
+	background: #000;
+	color: #ffcd10;
+	float: left;
+	padding: 10px 0;
+	text-align: center;
+	width: 200px;
+}
