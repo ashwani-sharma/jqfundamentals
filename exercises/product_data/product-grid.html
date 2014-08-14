@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Product Grid</title>
+	<link href="css/reset.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body>
+<div id="product-container">
+	<div id="filters">
+		<ul class="block">
+			<h3>Brands</h3>
+			<li>
+				<input type="checkbox" id="brand-a" class="brands checkbox" data-name="brand-a">
+				<label for="brand-a">Brand A</label>
+			</li>
+			<li>
+				<input type="checkbox" id="brand-b" class="brands checkbox" data-name="brand-b">
+				<label for="brand-b">Brand B</label>
+			</li>
+			<li>
+				<input type="checkbox" id="brand-c" class="brands checkbox" data-name="brand-c">
+				<label for="brand-c">Brand C</label>
+			</li>
+			<li>
+				<input type="checkbox" id="brand-d" class="brands checkbox" data-name="brand-d">
+				<label for="brand-d">Brand D</label>
+			</li>
+		</ul>
+
+		<ul class="block">
+			<h3>Colours</h3>
+			<li>
+				<input type="checkbox" id="yellow" class="brands checkbox" data-name="yellow">
+				<label for="yellow">Yellow</label>
+			</li>
+			<li>
+				<input type="checkbox" id="green" class="brands checkbox" data-name="green">
+				<label for="green">Green</label>
+			</li>
+			<li>
+				<input type="checkbox" id="blue" class="brands checkbox" data-name="blue">
+				<label for="blue">Blue</label>
+			</li>
+			<li>
+				<input type="checkbox" id="red" class="brands checkbox" data-name="red">
+				<label for="red">Red</label>
+			</li>
+		</ul>
+
+		<ul class="block">
+			<h3>Availability</h3>
+			<li>
+				<input type="checkbox" id="available" class="brands checkbox" data-name="available">
+				<label for="available">Available</label>
+			</li>
+			<li>
+				<input type="checkbox" id="not-available" class="brands checkbox" data-name="not-available">
+				<label for="not-available">Not Available</label>
+			</li>
+		</ul>
+	</div>
+	<div id="products"></div>
+</div>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/product-grid.js"></script>
+<!--
+<script src="js/sandbox.js"></script>
+<script src="js/hoverClass.js"></script>
+<script src="js/load.js"></script>
+<script src="js/blog.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/inputHint.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/slideshow.js"></script>
+-->
+</body>
+</html>

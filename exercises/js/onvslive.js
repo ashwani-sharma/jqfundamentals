@@ -1,29 +1,30 @@
-var EventMethods = function ($targetBlock, $button, $newRow) {
+var EventMethods = function ($targetBlock, $button) {
   this.$targetBlock = $targetBlock;
   this.$button = $button;
-  this.$newRow = $newRow;
   this.counter = 1;
 }
 
 EventMethods.prototype = {
   addNewRow: function () {
     var _this = this;
-    $(_this.$button).on('click', function () {
-      _this.$targetBlock.append($(_this.$newRow).html('Row ' + _this.counter++));
+    _this.$button.on('click', function () {
+      _this.$targetBlock.append($('<div class="block"></div>').html('Row ' + _this.counter++));
     });
   },
 
-   highlightDivOnClick: function () {
-    this.$targetBlock.delegate('.block', 'click', function () {
-      $(this).toggleClass('highlight');
-    });
-  },
-
-  removeLastDivOnClick: function () {
+   highlightOrRemoveSelectedDiv: function () {
     var _this = this;
-    _this.$targetBlock.delegate('.block:last', 'click', function () {
-      $(this).remove();
-      _this.counter--;
+    _this.$targetBlock.delegate('.block', 'click', function () {
+      var len = $('.block').length,
+          num = $(this).text().split(' ');
+
+      if(num[1] == len) {
+        $(this).remove();
+        _this.counter--;
+      }
+      else {
+        $(this).toggleClass('highlight');
+      }
     });
   }
 }
@@ -31,10 +32,8 @@ EventMethods.prototype = {
 $(document).ready(function () {
   var $targetBlock = $('#holder'),
       $button = $('#container .button .add-row'),
-      $newRow = '<div class="block">Row</div>',
-      eventMethods = new EventMethods($targetBlock, $button, $newRow);
+      eventMethods = new EventMethods($targetBlock, $button);
 
   eventMethods.addNewRow();
-  eventMethods.highlightDivOnClick();
-  eventMethods.removeLastDivOnClick();
+  eventMethods.highlightOrRemoveSelectedDiv();
 });
