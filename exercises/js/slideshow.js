@@ -1,45 +1,40 @@
-var SlideShow = function ($slideList) {
+var SlideShow = function ($slideShow, $slideList) {
+  this.$slideShow = $slideShow;
   this.$slideList = $slideList;
+  this.$length = this.$slideList.length;
+  this.$index = 0;
 }
 
 SlideShow.prototype.moveSliderPosition = function () {
-  $('#slideshow').prependTo('body');
+  this.$slideShow.prependTo('body');
+  this.$slideShow.children().hide();
+  $('<nav />').insertAfter(this.$slideShow);
 }
 
-SlideShow.prototype.slideEffect = function () {
+SlideShow.prototype.sliderEffect = function ($nextSlide) {
   var _this = this;
-  
-  $('<nav></nav>').appendTo('#slideshow');
-  _this.$slideList.hide();
-  
-  var slideShow = function (slideNum, slideCount) {
-    _this.$slideList.eq(slideNum).fadeOut(2000, function () {
-      _this.showImageNumber(slideNum, slideCount);
-    });
-    
-    slideNum = (slideNum + 1) % slideCount;
-    
-    _this.$slideList.eq(slideNum).delay(2000).fadeIn(2000, function () {
-      slideShow(slideNum, slideCount);
-    });
-  }
 
-  _this.$slideList.eq(0).fadeIn(2000, function () {
-    slideShow(0, _this.$slideList.length);
+  $('nav').text((_this.$index + 1) + " of " + _this.$length);
+
+  $nextSlide.fadeIn(1000).delay(1000).fadeOut(1000, function () {
+    _this.$index++;
+    if(_this.$index < _this.$length) {
+      _this.sliderEffect($(this).next());
+    }
+    else {
+      _this.$index = 0;
+      _this.sliderEffect(_this.$slideShow.children().first());
+    }
   });
-
-  _this.showImageNumber(0, $slideList.length);
 }
 
-SlideShow.prototype.showImageNumber = function (slideNum, slideCount) {
-  $('#slideshow').find('nav').html("Image: " + (slideNum + 1) + " of " + slideCount);
+SlideShow.prototype.slider = function () {
+  this.sliderEffect(this.$slideList.first())
 }
 
-$(document).ready(function () {
-  $slideList = $('#slideshow li');
-
-  var homeSlider = new SlideShow($slideList);
+$(function () {
+  var homeSlider = new SlideShow($('#slideshow'), $('#slideshow li'));
 
   homeSlider.moveSliderPosition();
-  homeSlider.slideEffect();
+  homeSlider.slider();
 });
