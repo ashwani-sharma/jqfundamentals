@@ -1,33 +1,63 @@
-var LoadJsonContent = function (){}
-
-LoadJsonContent.prototype = {
-  insertBlankContainer: function () {
-    var $targetDiv = $('<div class="json-content" />').appendTo('#specials');
-    $targetDiv.append('<h1 /><p /><img />');
-  },
-
-  callJsonData: function () {
-    var $targetContainer = $('div.json-content'),
-        $days = $('#specials').find('form select'),
-        cachedJson = {};
-
-    $days.change(function () {
-    	var $selectedValue = $(this).val();
-      $('#specials form .input_submit').remove();
-      $.getJSON('data/specials.json', function (data) {
-        cachedJson = data;
-
-        $targetContainer.css('background', cachedJson[$selectedValue].color);
-        $targetContainer.find('h1').html(cachedJson[$selectedValue].title);
-        $targetContainer.find('p').html(cachedJson[$selectedValue].text);
-        $targetContainer.find('img').attr('src', cachedJson[$selectedValue].image);
-      });
-    });
-  }
+var LoadJsonContent = function ($specials){
+  this.$specials = $specials;
 }
 
-$(document).ready(function () {
-  var loadJsonContent = new LoadJsonContent();
-  loadJsonContent.insertBlankContainer();
-  loadJsonContent.callJsonData();
+LoadJsonContent.prototype.initMethods = function () {
+  this.insertBlankContainer();
+  this.callJsonData();
+}
+
+LoadJsonContent.prototype.insertBlankContainer = function () {
+  var $targetDiv = $('<div />').attr('class', 'json-content').appendTo(this.$specials);
+  $targetDiv.append('<h1 /><p /><img />');
+  this.$specials.find('.input_submit').remove();
+}
+
+LoadJsonContent.prototype.callJson = function () {
+  var jsonData;
+  $.ajax({
+    url: "data/specials.json",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    cache: true,
+    success: function(data){
+      jsonData = data;
+    }
+  });
+  return jsonData;
+}
+
+LoadJsonContent.prototype.callJsonData = function () {
+  var _this = this;
+      $targetContainer = $('div.json-content'),
+      $days = _this.$specials.find('form select'),
+      cachedJson = [];
+
+  $days.change(function () {
+    var currentHTML = $targetContainer.html(),
+        value = $(this).val();
+
+    if(!($(this).val())) {
+      $targetContainer.html();
+    }
+    else {
+      if(cachedJson.length == 0) {
+        _this.getJsonData($targetContainer, value);
+      }
+    }
+  });
+}
+
+LoadJsonContent.prototype.getJsonData = function ($targetContainer, value) {
+  var _this = this,
+      cachedJson = _this.callJson(),
+      jsonHtmlData = '<h1>' + cachedJson[value].title + '</h1><p>' + cachedJson[value].text + '</p><img src=' + cachedJson[value].image + '>'
+
+  $targetContainer.css('background', cachedJson[value].color).html(jsonHtmlData);
+}
+
+$(function () {
+  var loadJsonContent = new LoadJsonContent($('#specials'));
+  loadJsonContent.initMethods();
 });
