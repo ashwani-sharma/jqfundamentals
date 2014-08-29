@@ -52,7 +52,7 @@ LoadJsonContent.prototype.callJsonData = function () {
 LoadJsonContent.prototype.getJsonData = function ($targetContainer, value) {
   var _this = this,
       cachedJson = _this.callJson(),
-      jsonHtmlData = '<h1>' + cachedJson[value].title + '</h1><p>' + cachedJson[value].text + '</p><img src=' + cachedJson[value].image + '>'
+      jsonHtmlData = '<h1>' + cachedJson[value].title + '</h1><p>' + cachedJson[value].text + '</p><img src=' + cachedJson[value].image + '>';
 
   $targetContainer.css('background', cachedJson[value].color).html(jsonHtmlData);
 }
