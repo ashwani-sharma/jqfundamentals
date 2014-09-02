@@ -13,7 +13,7 @@ EventMethods.prototype = {
   addNewRow: function () {
     var _this = this;
     _this.$button.on('click', function () {
-      _this.$targetBlock.append($('<div></div>').attr('class', 'block').html('Row ' + _this.counter++));
+      _this.$targetBlock.append($('<div></div>').addClass('block').html('Row ' + _this.counter++));
     });
   },
 
