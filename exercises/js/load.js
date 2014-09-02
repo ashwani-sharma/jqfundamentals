@@ -1,19 +1,21 @@
-var LoadAjaxData = function (){}
+var LoadAjaxData = function ($targetElement){
+  this.$targetElement = $targetElement;
+}
 
 LoadAjaxData.prototype = {
   createDataContainer: function () {
-    $('#blog h3').each(function () {
-      var $dataContainer = $('<div class="blog-data"></div>').appendTo($(this).parent('li'));
+    this.$targetElement.each(function () {
+      var $dataContainer = $('<div></div>').addClass('blog-data').appendTo($(this).parent('li'));
       $(this).data('targetDiv', $dataContainer);
     });
   },
 
   loadBlogData: function () {
-    $('#blog h3').bind('click', function (e) {
+    this.$targetElement.bind('click', function (e) {
       e.preventDefault();
 
-      var $target = $(this).parent('li').find('.blog-data'),
-          dataRef = $(this).parent('li').find('a').attr('href'),
+      var dataRef = $(this).parent('li').find('a').attr('href'),
+          // $target = $(this).parent('li').find('.blog-data'),
           dataHash = dataRef.substring(dataRef.indexOf('#'));
 
       // $($target).load('data/blog.html ' + dataHash);
@@ -23,7 +25,8 @@ LoadAjaxData.prototype = {
 }
 
 $(document).ready(function () {
-  var loadAjaxData = new LoadAjaxData();
+  var loadAjaxData = new LoadAjaxData($('#blog h3'));
+
   loadAjaxData.createDataContainer();
   loadAjaxData.loadBlogData();
 });
