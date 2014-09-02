@@ -32,9 +32,7 @@ EventMethods.prototype = {
 }
 
 $(document).ready(function () {
-  var $targetBlock = $('#holder'),
-      $button = $('#container .button .add-row'),
-      eventMethods = new EventMethods($targetBlock, $button);
+  var eventMethods = new EventMethods($('#holder'), $('#container .button .add-row'));
 
   eventMethods.bindEvents();
 });
