@@ -20,12 +20,13 @@ EventMethods.prototype = {
    highlightOrRemoveSelectedDiv: function () {
     var _this = this;
     _this.$targetBlock.delegate('.block', 'click', function () {
-      if($('.block').last().is($(this))) {
-        $(this).remove();
+      var $this = $(this);
+      if($('.block').last().is($this)) {
+        $this.remove();
         _this.counter--;
       }
       else {
-        $(this).toggleClass('highlight');
+        $this.toggleClass('highlight');
       }
     });
   }
