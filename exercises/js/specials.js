@@ -31,8 +31,7 @@ LoadJsonContent.prototype.callJson = function () {
 LoadJsonContent.prototype.callJsonData = function () {
   var _this = this;
       $targetContainer = $('div.json-content'),
-      $days = _this.$specials.find('form select'),
-      cachedJson = [];
+      $days = _this.$specials.find('form select');
 
   $days.change(function () {
     var currentHTML = $targetContainer.html(),
@@ -42,9 +41,7 @@ LoadJsonContent.prototype.callJsonData = function () {
       $targetContainer.html();
     }
     else {
-      if(cachedJson.length == 0) {
-        _this.getJsonData($targetContainer, value);
-      }
+      _this.getJsonData($targetContainer, value);
     }
   });
 }
