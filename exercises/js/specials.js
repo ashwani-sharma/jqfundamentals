@@ -29,18 +29,16 @@ LoadJsonContent.prototype.callJson = function () {
 }
 
 LoadJsonContent.prototype.callJsonData = function () {
-  var _this = this;
+  var _this = this,
       $targetContainer = $('div.json-content'),
       $days = _this.$specials.find('form select');
 
   $days.change(function () {
+    var $this = $(this);
     var currentHTML = $targetContainer.html(),
-        value = $(this).val();
+        value = $this.val();
 
-    if(!($(this).val())) {
-      $targetContainer.html();
-    }
-    else {
+    if($this.val()) {
       _this.getJsonData($targetContainer, value);
     }
   });
