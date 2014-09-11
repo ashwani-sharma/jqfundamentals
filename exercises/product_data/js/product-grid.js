@@ -2,7 +2,6 @@ var ProductGrid = function ($productContainer, $filterHolder, $checkBox) {
 	this.$productContainer = $productContainer;
 	this.$filterHolder = $filterHolder;
 	this.$checkBox = $checkBox;
-	this.jsonData = [];
 }
 
 ProductGrid.prototype.loadJson = function () {
@@ -13,19 +12,17 @@ ProductGrid.prototype.loadJson = function () {
 		method: 'get',
 		dataType: 'json'
 	}).success(function (data) {
-		_this.jsonData = data;
-		_this.createHtmlData();
+		_this.createHtmlData(data);
 	})
 }
 
-ProductGrid.prototype.createHtmlData = function () {
+ProductGrid.prototype.createHtmlData = function (data) {
 	var _this = this;
-
-	for(var i = 0; i < _this.jsonData.length; i = i + 1) {
-		var url = _this.jsonData[i].url,
-				brand = _this.jsonData[i].brand,
-				color = _this.jsonData[i].color,
-				soldOut = _this.jsonData[i].sold_out,
+	for(var i = 0; i < data.length; i = i + 1) {
+		var url = data[i].url,
+				brand = data[i].brand,
+				color = data[i].color,
+				soldOut = data[i].sold_out,
 				img = '<img src="images/'  + url +'"/>'
 				$productBox = $('<span></span>').attr({'id': i, 'data-brand': brand, 'data-color': color, 'data-sold-out': soldOut}).addClass('box').appendTo(_this.$productContainer);
 		
@@ -40,28 +37,26 @@ ProductGrid.prototype.showFilteredProducts = function (filters) {
 
 ProductGrid.prototype.filteredData = function () {
 	var _this = this,
+			$holder = _this.filterHolder,
 			$product = $('span.box');
 
-	_this.$filterHolder.each(function () {
-		$product = _this.dataStorage($product);
+	_this.$filterHolder.each(function (i, $holder) {
+		$product = _this.dataStorage($product, $holder);
 	});
 
 	_this.showFilteredProducts($product);
 }
 
 ProductGrid.prototype.dataStorage = function (elem, holder) {
-	var _this = this,
-			checkedBox = _this.$filterHolder.find('.checkbox:checked')
+	var checkedBox = $(holder).find('.checkbox:checked');
 
-	if(checkedBox.length == 0) {
-		return elem;
-	}
-	else {
+	if(checkedBox.length != 0) {
 		var array = [];
 
 		checkedBox.each(function () {
-			var filterName = $(this).attr('name'),
-					valueSelected = $(this).attr('data-' + filterName);
+			var $this = $(this),
+					filterName = $this.attr('name'),
+					valueSelected = $this.attr('data-' + filterName);
 
 			$(elem).each(function () {
 				if($(this).attr('data-' + filterName) == valueSelected) {
@@ -71,14 +66,15 @@ ProductGrid.prototype.dataStorage = function (elem, holder) {
 		});
 		return array;
 	}
+	else {
+		return elem;
+	}
 }
 
 ProductGrid.prototype.bindEvent = function () {
 	var _this = this;
 
 	_this.$checkBox.on('change', function () {
-		var $this = $(this);
-
 		_this.filteredData();
 	});
 }
