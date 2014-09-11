@@ -4,6 +4,11 @@ var ProductGrid = function ($productContainer, $filterHolder, $checkBox) {
 	this.$checkBox = $checkBox;
 }
 
+ProductGrid.prototype.init = function () {
+	this.loadJson();
+	this.bindEvent();
+}
+
 ProductGrid.prototype.loadJson = function () {
 	var _this = this;
 
@@ -28,6 +33,14 @@ ProductGrid.prototype.createHtmlData = function (data) {
 		
 		$(img).appendTo($productBox);
 	}
+}
+
+ProductGrid.prototype.bindEvent = function () {
+	var _this = this;
+
+	_this.$checkBox.on('change', function () {
+		_this.filteredData();
+	});
 }
 
 ProductGrid.prototype.showFilteredProducts = function (filters) {
@@ -71,16 +84,7 @@ ProductGrid.prototype.dataStorage = function (elem, holder) {
 	}
 }
 
-ProductGrid.prototype.bindEvent = function () {
-	var _this = this;
-
-	_this.$checkBox.on('change', function () {
-		_this.filteredData();
-	});
-}
-
 $(function () {
 	var productGrid = new ProductGrid($('#products'), $('ul.block'), $('ul.block .checkbox'));
-	productGrid.loadJson();
-	productGrid.bindEvent();
+	productGrid.init();
 });
