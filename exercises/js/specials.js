@@ -34,9 +34,10 @@ LoadJsonContent.prototype.callJsonData = function () {
       $days = _this.$specials.find('form select');
 
   $days.change(function () {
-    var $this = $(this);
-    var currentHTML = $targetContainer.html(),
+    var $this = $(this),
+        currentHTML = $targetContainer.html(),
         value = $this.val();
+
 
     if($this.val()) {
       _this.getJsonData($targetContainer, value);
