@@ -377,3 +377,48 @@ margin: 15px 0;
 	text-align: center;
 	width: 200px;
 }
+
+.custom-timing {
+	border-bottom: solid 2px #cacaca;
+	border-top: solid 2px #cacaca;
+	float: left;
+	margin: 20px 0;
+	padding: 20px 0;
+	width: 100%;
+}
+
+.custom-timing .block {
+	float: left;
+	width: 200px;
+}
+
+.custom-timing .block label {
+	display: block;
+	font: 11px 'verdana';
+	font-weight: bold;
+}
+
+.custom-timing .block input[type='text'] {
+	background: #fff;
+	border: solid 1px #cacaca;
+	cursor: text;
+	font: 14px tahoma;
+	height: 30px;
+	width: 160px;
+	padding: 0 10px;
+}
+
+.custom-timing .block input[type='text']:hover {
+	cursor: text;
+}
+
+.custom-timing .block input[type='button'] {
+	background: #cacaca;
+	border: solid 1px #cacaca;
+	color: #fff;
+	cursor: pointer;
+	font: 14px tahoma;
+	height: 30px;
+	width: 100px;
+	padding: 0 10px;
+}
