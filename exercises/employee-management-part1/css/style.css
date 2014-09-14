@@ -1,0 +1,176 @@
+body {
+	background: #fff;
+	color: #535456;
+	font: 14px tahoma;
+}
+
+#wrapper {
+	position: relative;
+	padding: 20px;
+}
+
+#roles {
+	float: left;
+	background: #ebebeb;
+	border: solid 1px #d7d7d7;
+	padding: 20px 10px;
+	width: 228px;
+}
+
+#employees {
+	float: left;
+	border: solid 1px #ebebeb;
+	left: 320px;
+	padding: 20px 10px;
+	position: fixed;
+	width: 228px;
+}
+
+#todos {
+	float: left;
+	border: solid 1px #ebebeb;
+	margin-left: 350px;
+	padding: 20px 10px;
+	width: 578px;
+}
+
+.roles-block,
+.emp-block,
+.todos-block {
+	float: left;
+	position: relative;
+	width: 100%;
+}
+
+.todos-block {
+	padding-bottom: 30px;
+}
+
+.todos-block .collapse,
+.todos-block .expand {
+	background: transparent url(../images/collapse.png) 0 0 no-repeat;
+	float: left;
+	height: 18px;
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	width: 18px;
+}
+
+.todos-block .expand {
+	background: transparent url(../images/expand.png) 0 0 no-repeat;
+}
+
+.roles-block h3,
+.emp-block h3,
+.todos-block h3 {
+	border-bottom: solid 1px #000;
+	color: #000;
+	font-size: 18px;
+	font-weight: bold;
+	padding-bottom: 6px;
+	text-align: center;
+}
+
+.roles-list,
+.emp-list,
+.todos-list {
+	float: left;
+	width: 100%;
+}
+
+.roles-list {
+	min-height: 50px;
+	padding-bottom: 20px;
+}
+
+.roles-list li,
+.emp-list li,
+.todos-list li {
+	border-top: solid 1px #d7d7d7;
+	cursor: pointer;
+	float: left;
+	padding: 10px 0;
+	position: relative;
+	width: 228px;
+}
+
+.emp-list li {
+	cursor: move;
+}
+
+.roles-list li {
+	padding: 10px 0 10px 24px;
+	width: 204px;
+}
+
+.roles-list li:hover,
+.emp-list li:hover,
+.todos-list li:hover {
+	color: #000;
+}
+
+.roles-list li:first-child,
+.emp-list li:first-child,
+.todos-list li:first-child {
+	border-top: none;
+}
+
+.names {
+	font: 14px tahoma;
+	color: #535456;
+	display: block;
+	text-decoration: none;
+}
+
+.names:hover {
+	text-decoration: underline;
+}
+
+.roles-list li .remove {
+	background: transparent url(../images/delete.png) 0 0 no-repeat;
+	display: none;
+	float: left;
+	height: 18px;
+	left: 0px;
+	position: absolute;
+	top: 9px;
+	width: 18px;
+}
+
+.roles-list li:hover .remove {
+	display: block;
+}
+
+.todos-holder {
+	float: left;
+	margin: 20px 0;
+	width: 100%;
+}
+
+.todos-holder .todos-emp {
+	border: solid 1px #ebebeb;
+	float: left;
+	font-weight: bold;
+	padding: 5px 1%;
+	text-align: center;
+	width: 22%;
+}
+
+.todos-holder .todos-section {
+	border: solid 1px #ebebeb;
+	float: right;
+	padding: 20px 1%;
+	position: relative;
+	width: 68%;
+}
+
+.add-todos {
+	background: transparent url(../images/add.png) 0 0 no-repeat;
+	float: left;
+	height: 18px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 18px;
+}
