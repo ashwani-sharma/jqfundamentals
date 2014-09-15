@@ -12,8 +12,8 @@ EmployeeManagementRole.prototype.initMethods = function () {
 
 EmployeeManagementRole.prototype.createEmployeesRolesAndTodosLists = function () {
   this.createEmployeeList();
-  this.createRolesList();
-  this.createTodosList();
+  this.createLists('id', 'roles-block', '<ul/>', 'roles-list', '#roles', false);
+  this.createLists('data-todo', 'todos-block', '<ul/>', 'todos', '#todos', true);
 }
 
 EmployeeManagementRole.prototype.createEmployeeList = function () {
@@ -25,37 +25,23 @@ EmployeeManagementRole.prototype.createEmployeeList = function () {
   }
 }
 
-EmployeeManagementRole.prototype.createRolesList = function () {
+EmployeeManagementRole.prototype.createLists = function (dataAttr, className, blockClass, innerClass, container, collapsable) {
   var _this = this,
-      data = _this.jsonRoles,
-      $container = $('#roles');
+      data = _this.jsonRoles;
 
   for(i = 0; i < data.length; i++) {
-    var $block = $('<div/>').attr('id', data[i].type.replace(' Developers', '').toLowerCase()).addClass('roles-block'),
+    var $block = $('<div/>').attr(dataAttr, data[i].type.slice(0, data[i].type.indexOf(" ")).toLowerCase()).addClass(className),
         $h3 = $('<h3/>').text(data[i].type),
-        $ul = $('<ul/>').addClass('roles-list');
+        $holder = $(blockClass).addClass(innerClass);
+
+    if(collapsable){
+      $linkAccordion = $('<a/>').attr('href', 'javascript:').addClass('collapse');
+      $linkAccordion.appendTo($block);
+    }
 
     $h3.appendTo($block);
-    $ul.appendTo($block);
-    $block.appendTo($container);
-  }
-}
-
-EmployeeManagementRole.prototype.createTodosList = function () {
-  var _this = this,
-      data = _this.jsonRoles,
-      $container = $('#todos');
-
-  for(i = 0; i < data.length; i++) {
-    var $block = $('<div/>').attr('data-todo', data[i].type.replace(' Developers', '').toLowerCase()).addClass('todos-block'),
-        $h3 = $('<h3/>').text(data[i].type),
-        $blockLink = $('<a/>').attr('href', 'javascript:').addClass('collapse');
-        $holder = $('<div/>').addClass('todos');
-
-    $h3.appendTo($block);
-    $blockLink.appendTo($block);
     $holder.appendTo($block);
-    $block.appendTo($container);
+    $block.appendTo(container);
   }
 }
 
@@ -121,7 +107,7 @@ EmployeeManagementRole.prototype.bindEvents = function () {
 }
 
 EmployeeManagementRole.prototype.expandOrCollapseTodoSection = function () {
-  $('.todos-block').delegate('.collapse','click', function () {
+  $('.todos-block').delegate('.collapse', 'click', function () {
     $(this).toggleClass('expand').parent('.todos-block').find('.todos').slideToggle();
   });
 }
@@ -138,7 +124,7 @@ EmployeeManagementRole.prototype.removeCreatedRolesAndTodosBlock = function () {
   });
 }
 
-$(document).ready(function () {
+$(function () {
   var employeeManagementRole = new EmployeeManagementRole('.roles-block');
   employeeManagementRole.initMethods();
 });
