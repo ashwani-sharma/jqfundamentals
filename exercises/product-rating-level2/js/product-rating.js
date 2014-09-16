@@ -30,7 +30,7 @@ ProductRating.prototype.createProductsWithRadioButtons = function () {
       dataProducts = _this.products;
 
   for (var i = 0; i < dataProducts.length; i++) {
-    var radioHolder = $('<div/>').addClass('radio-box').appendTo(_this.$container);
+    var radioHolder = $('<div/>').addClass('radio-block').appendTo(_this.$container);
     $('<label/>').attr('for', dataProducts[i].item).attr('id', dataProducts[i].item).addClass('prod-item').html(dataProducts[i].item).appendTo(radioHolder);
     
     for (var j = 0; j < dataRatings.length; j++) {
@@ -52,7 +52,7 @@ ProductRating.prototype.actionOnClickingRadioButtons = function () {
   this.$container.delegate('input[type="radio"]', 'click', function () {
     var $this = $(this);
     $('.rate-row').find('#' + $this.attr('class')).addClass('highlighted').siblings().removeClass('highlighted');
-    $('.radio-box').find('#' + $this.attr('name')).addClass('highlighted').parent().siblings().find('.prod-item').removeClass('highlighted ');
+    $('.radio-block').find('#' + $this.attr('name')).addClass('highlighted').parent().siblings().find('.prod-item').removeClass('highlighted ');
   });
 }
 
@@ -61,7 +61,7 @@ ProductRating.prototype.actionOnClickingProductLabels = function () {
     var $this = $(this);
     $('.prod-item.selected').removeClass('selected');
     $this.toggleClass('selected highlighted');
-    $('.prod-item.selected').parent('.radio-box').siblings().find('.prod-item').removeClass('highlighted');
+    $('.prod-item.selected').parent('.radio-block').siblings().find('.prod-item').removeClass('highlighted');
     $('.rate-row').find('.highlighted').removeClass('highlighted');
     $('.rate-row').find('#' + $this.parent().find('input:checked').attr('class')).addClass('highlighted');
     if(!($('.prod-item').hasClass('highlighted'))) {
