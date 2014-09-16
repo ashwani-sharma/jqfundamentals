@@ -47,15 +47,15 @@ ProductRating.prototype.bindEvents = function () {
   this.$container.delegate('.ratings', "click", this.actionOnClickingRatingLables);
 }
 
-ProductRating.prototype.actionOnClickingRatingLables = function() {
+ProductRating.prototype.actionOnClickingRatingLables = function () {
   var $this =$(this);
-  $('.highlighted').each(function() {
+  $('.highlighted').each(function () {
     $this.addClass('highlighted').siblings('.ratings').removeClass('highlighted');
     $(this).siblings('span').find('.' + $this.attr('id')).prop({disabled: false, checked: true}).parent().siblings('span').children().prop({disabled: true, checked: false});
   });
 }
 
-ProductRating.prototype.actionOnClickingProductLabels = function() {
+ProductRating.prototype.actionOnClickingProductLabels = function () {
   var $this = $(this);
   $('.prod-item.selected').removeClass('selected');
   $this.toggleClass('selected highlighted');
