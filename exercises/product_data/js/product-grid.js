@@ -28,7 +28,7 @@ ProductGrid.prototype.createHtmlData = function (data) {
         brand = data[i].brand,
         color = data[i].color,
         soldOut = data[i].sold_out,
-        img = '<img src="images/'  + url +'"/>'
+        img = '<img src="images/'  + url +'"/>',
         $productBox = $('<span></span>').attr({'id': i, 'data-brand': brand, 'data-color': color, 'data-sold-out': soldOut}).addClass('box').appendTo(_this.$productContainer);
 		
     $(img).appendTo($productBox);
@@ -43,28 +43,28 @@ ProductGrid.prototype.bindEvent = function () {
   });
 }
 
-ProductGrid.prototype.showFilteredProducts = function (filters) {
+ProductGrid.prototype.showFilteredProducts = function (filteredProducts) {
   $('span.box').hide();
-  $(filters).show();
+  $(filteredProducts).show();
 }
 
 ProductGrid.prototype.filteredData = function () {
   var _this = this,
       $holder = _this.filterHolder,
-      $product = $('span.box');
+      $products = $('span.box');
 
   _this.$filterHolder.each(function (i, $holder) {
-    $product = _this.dataStorage($product, $holder);
+    $products = _this.getFilteredProducts($products, $holder);
   });
 
-  _this.showFilteredProducts($product);
+  _this.showFilteredProducts($products);
 }
 
-ProductGrid.prototype.dataStorage = function (elem, holder) {
+ProductGrid.prototype.getFilteredProducts = function (elem, holder) {
   var checkedBox = $(holder).find('.checkbox:checked');
 
   if(checkedBox.length != 0) {
-    var array = [];
+    var dataArray = [];
 
     checkedBox.each(function () {
       var $this = $(this),
@@ -73,11 +73,11 @@ ProductGrid.prototype.dataStorage = function (elem, holder) {
 
       $(elem).each(function () {
         if($(this).attr('data-' + filterName) == valueSelected) {
-          array.push(this);
+          dataArray.push(this);
         }
       });
     });
-    return array;
+    return dataArray;
   }
   else {
     return elem;

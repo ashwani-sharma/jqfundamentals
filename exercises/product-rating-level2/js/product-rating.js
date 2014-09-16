@@ -51,7 +51,7 @@ ProductRating.prototype.actionOnClickingRatingLables = function () {
   var $this = $(this);
   $('.highlighted').each(function () {
     $this.addClass('highlighted').siblings('.ratings').removeClass('highlighted');
-    $(this).siblings('span').find('.' + $this.attr('id')).prop({disabled: false, checked: true}).parent().siblings('span').children().prop({disabled: true, checked: false});
+    $(this).siblings('span').find('.' + $this.attr('id')).prop({disabled: false, checked: true}).parent().siblings('span').children().prop({checked: false});
   });
 }
 
@@ -62,7 +62,8 @@ ProductRating.prototype.actionOnClickingProductLabels = function () {
   $('.prod-item.selected').parent('.radio-box').siblings().find('.prod-item').removeClass('highlighted');
   if(!($('.prod-item').hasClass('highlighted'))) {
     $('.ratings').removeClass('highlighted');
-  }
+  };
+  // $this.parent('.radio-box').find('input[name = "' + $this.text() + '"]').prop('disabled', false);
 }
 
 $(function () {
