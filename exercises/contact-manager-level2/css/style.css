@@ -1,0 +1,42 @@
+body {
+  font: 16px arial;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  display: table;
+  margin: 20px;
+}
+
+#form-row,
+#search-row {
+  float: left;
+  width: 100%;
+}
+
+#search-row {
+  margin-top: 20px;
+}
+
+.block {
+  float: left;
+  width: 250px;
+}
+
+.block input[type="text"] {
+  border: solid 1px #cacaca;
+  height: 24px;
+  padding: 0 5px;
+  width: 160px;
+}
+
+#add-contact {
+  background: #333;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 26px;
+  text-align: center;
+  width: 100px;
+}

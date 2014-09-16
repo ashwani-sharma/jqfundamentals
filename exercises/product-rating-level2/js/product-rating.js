@@ -60,7 +60,7 @@ ProductRating.prototype.actionOnClickingProductLabels = function () {
   this.$container.delegate('.prod-item', 'click', function () {
     var $this = $(this);
     $('.prod-item.selected').removeClass('selected');
-    $this.toggleClass('selected highlighted');
+    $this.addClass('selected highlighted').parent().siblings().removeClass('selected highlighted');
     $('.prod-item.selected').parent('.radio-block').siblings().find('.prod-item').removeClass('highlighted');
     $('.rate-row').find('.highlighted').removeClass('highlighted');
     $('.rate-row').find('#' + $this.parent().find('input:checked').attr('class')).addClass('highlighted');
