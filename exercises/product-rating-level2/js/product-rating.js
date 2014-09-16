@@ -48,7 +48,7 @@ ProductRating.prototype.bindEvents = function () {
 }
 
 ProductRating.prototype.actionOnClickingRatingLables = function () {
-  var $this =$(this);
+  var $this = $(this);
   $('.highlighted').each(function () {
     $this.addClass('highlighted').siblings('.ratings').removeClass('highlighted');
     $(this).siblings('span').find('.' + $this.attr('id')).prop({disabled: false, checked: true}).parent().siblings('span').children().prop({disabled: true, checked: false});
