@@ -1,0 +1,63 @@
+body {
+  font: 16px arial;
+  margin: 0;
+  padding: 0;
+}
+
+#products {
+	margin: 100px auto 0;
+	overflow: hidden;
+	width: 600px;
+}
+
+.rate-row {
+  border-bottom: solid 1px #cacaca;
+  float: left;
+  height: 30px;
+  padding-left: 100px;
+  width: 100%;
+}
+
+.rate-row .ratings {
+  background: #eaeaea;
+  border-left: solid 1px #fff;
+  cursor: pointer;
+  font-size: 18px;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+  text-align: center;
+  width: 99px;
+}
+
+.rate-row .ratings.highlighted {
+  background: #454545;
+  color: #fff;
+}
+
+.radio-box {
+  border-bottom: solid 1px #cacaca;
+  float: left;
+  width: 100%;
+}
+
+.radio-box .prod-item {
+  float: left;
+  cursor: pointer;
+  margin: 0;
+  padding: 10px 0 10px 15px;
+  width: 85px;
+}
+
+.radio-box .prod-item.highlighted {
+  background: #454545;
+  color: #fff;
+}
+
+.radio-box .radios {
+  float: left;
+  padding: 10px 0;
+  text-align: center;
+  width: 100px;
+}
