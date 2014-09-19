@@ -11,15 +11,19 @@
 <body>
 <div id="wrapper">
   <div id="form-row">
-    <div class="block"><label>Name: </label> <input type="text" name="name" id="name" class="required"></div>
-    <div class="block"><label>Email: </label> <input type="text" name="email" id="email" class="required"></div>
-    <input type="button" value="Add" id="add-contact">
+  	<form name="contacts" id="contacts">
+	    <div class="block"><label>Name: </label> <input type="text" name="name" id="name" class="required name" required></div>
+	    <div class="block"><label>Email: </label> <input type="text" name="email" id="email" class="required email" required></div>
+	    <input type="button" value="Add" id="add-contact">
+	  </form>
   </div>
   <div id="search-row">
     <div class="block"><label>Search: </label> <input type="text" name="search" id="search"></div>
   </div>
+  <div id="container"></div>
 </div>
 <script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.validate.js"></script>
 <script src="js/contact-manager.js"></script>
 </body>
 </html>
