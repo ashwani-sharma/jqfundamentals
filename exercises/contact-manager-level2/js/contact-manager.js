@@ -1,11 +1,9 @@
-var ContactManager = function ($required, $email, $search) {
-  this.$required = $required;
-  this.$email = $email;
-  this.$search = $search;
+var ContactManager = function (params) {
+  this.params = params;
   this.emailRegEx = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
 }
 
-ContactManager.prototype.initMethods = function () {
+ContactManager.prototype.bindEvents = function () {
   this.createContactBlocks();
   this.deleteCreatedBlocks();
   this.searchBlockByEnteredName();
@@ -15,36 +13,39 @@ ContactManager.prototype.createContactBlocks = function () {
   var _this = this;
 
   $('#add-contact').on('click', function () {
-    var inputValues = [];
-
-    if(_this.getValuesFromInputs(inputValues) && _this.validateEmailField(_this.$email, _this.emailRegEx)) {
-      _this.$required.val('');
-      _this.createContactBlock(inputValues[0], inputValues[1]);
-    }
+    _this.getInputValuesWithBlockElements();
   });
 }
 
-ContactManager.prototype.getValuesFromInputs = function (valuesArray) {
-  var _this = this,
-      len = _this.$required.length;
+ContactManager.prototype.getInputValuesWithBlockElements = function () {
+  var inputValues = [];
 
-  for(i = 0; i < len; i++) {
-    if(!_this.$required[i].value.trim()) {
-      alert(_this.$required[i].name + ' field cant be empty');
-      _this.$required[i].focus();
+  if(this.getValuesFromInputs(inputValues) && this.validateEmailField()) {
+    this.params.$required.val('');
+    this.createContactBlock(inputValues[0], inputValues[1]);
+  }
+}
+
+ContactManager.prototype.getValuesFromInputs = function (valuesArray) {
+  var inputs = this.params.$required;
+
+  for(i = 0, len = inputs.length; i < len; i++) {
+    if(!inputs[i].value.trim()) {
+      alert(inputs[i].name + ' field cant be empty');
+      inputs[i].focus();
       return false;
     }
     else {
-      valuesArray.push(_this.$required[i].value);
+      valuesArray.push(inputs[i].value);
     }
   }
   return valuesArray;
 }
 
-ContactManager.prototype.validateEmailField = function (input, pattern) {
-  if(!pattern.test(input.val())) {
+ContactManager.prototype.validateEmailField = function () {
+  if(!this.emailRegEx.test(this.params.$email.val())) {
     alert('Please enter valid email');
-    input.focus();
+    this.params.$email.focus();
     return false;
   }
   return true;
@@ -57,26 +58,21 @@ ContactManager.prototype.createContactBlock = function (elem1, elem2) {
       $deleteButton = $('<input/>').attr({type: 'button', value: 'Delete'}).addClass('delete-block'),
       $block = $('<div/>').attr('data-name', elem1.toLowerCase()).addClass('contact-block');
 
-  $nameRow.appendTo($block);
   $nameSpan.appendTo($nameRow);
-  $emailRow.appendTo($block);
-  $deleteButton.appendTo($block);
-
-  $block.appendTo('#container');
+  $block.append($nameRow, $emailRow, $deleteButton).appendTo(this.params.$container);
 }
 
 ContactManager.prototype.deleteCreatedBlocks = function () {
-  $('#container').delegate('.delete-block', 'click', function () {
+  this.params.$container.delegate('.delete-block', 'click', function () {
     $(this).parent('.contact-block').remove();
   });
 }
 
 ContactManager.prototype.searchBlockByEnteredName = function () {
   var _this = this;
-
-  _this.$search.keyup(function () {
+  _this.params.$search.keyup(function () {
     var text = $(this).val().toLowerCase().trim(),
-        $nameBlock = $('#container').find('.contact-block');
+        $nameBlock = _this.params.$container.find('.contact-block');
 
     $nameBlock.each(function () {
       var $this = $(this);
@@ -91,6 +87,8 @@ ContactManager.prototype.searchBlockByEnteredName = function () {
 }
 
 $(function () {
-  var contactManager = new ContactManager($('.required'), $('.email'), $('#search'));
-  contactManager.initMethods();
+  var params = {$required: $(".required"), $email: $('.email'), $search: $('#search'), $container: $('#container')},
+      contactManager = new ContactManager(params);
+
+  contactManager.bindEvents();
 });
