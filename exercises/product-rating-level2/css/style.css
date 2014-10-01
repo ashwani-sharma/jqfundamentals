@@ -36,13 +36,13 @@ body {
   color: #fff;
 }
 
-.radio-block {
+.product-row {
   border-bottom: solid 1px #cacaca;
   clear: both;
   float: left;
 }
 
-.radio-block .prod-item {
+.product-row .prod-item {
   float: left;
   cursor: pointer;
   margin: 0;
@@ -50,12 +50,12 @@ body {
   width: 85px;
 }
 
-.radio-block .prod-item.highlighted {
+.product-row .prod-item.highlighted {
   background: #454545;
   color: #fff;
 }
 
-.radio-block .radios {
+.product-row .radios {
   border-left: solid 1px #cacaca;
   float: left;
   padding: 10px 0;
