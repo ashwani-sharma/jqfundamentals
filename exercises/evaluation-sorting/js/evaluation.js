@@ -1,36 +1,31 @@
-var PrioritySort = function ($ul, $li) {
+var PrioritySort = function ($ul) {
   this.$ul = $ul;
-  this.$li = $li;
-  this.$liHeight = this.$li.innerHeight();
 }
 
 PrioritySort.prototype.initMethods = function () {
   this.getInitiallySortedItems(this.$ul);
-  this.displayLiCountWithSeeAllLink();
+  this.displayLiCountWithLinks();
   this.bindEvents();
 }
 
 PrioritySort.prototype.getInitiallySortedItems = function (block) {
-  var _this = this;
   block.each(function () {
     var $this = $(this);
-    $this.find(_this.$li).sort(function (x, y) {
-      return x.getAttribute('priority-order') - y.getAttribute('priority-order');
+    $this.find('li.row').sort(function (x, y) {
+      return $(x).attr('priority-order') - $(y).attr('priority-order');
     }).appendTo($this);
   });
 }
 
-PrioritySort.prototype.displayLiCountWithSeeAllLink = function () {
-  var _this = this;
-
-  _this.$ul.each(function () {
+PrioritySort.prototype.displayLiCountWithLinks = function () {
+  this.$ul.each(function () {
     var $this = $(this),
-        count = $this.attr('initial-items-count'),
-        link = $('<a/>').attr('href', 'javascript:').addClass('see-all').text('see all'),
-        linkHolder = $('<li></li>').append(link);
+        count = $this.attr('initial-items-count') - 1,
+        linkSee = $('<a/>').attr('href', 'javascript:').addClass('see-all').text('see all'),
+        linkHide = $('<a/>').attr('href', 'javascript:').addClass('see-less').text('see less').hide(),
+        linkHolder = $('<li></li>').addClass('link-holder').append(linkSee, linkHide).appendTo($this);
 
-    linkHolder.insertAfter($this.find('li').eq(count - 1));
-    $this.height(_this.$liHeight * count);
+    $this.find('li.row:gt(' + count + ')').hide();
   });
 }
 
@@ -43,18 +38,13 @@ PrioritySort.prototype.bindSeeAllLink = function () {
   var _this = this;
 
   _this.$ul.on('click', 'a.see-all', function () {
-    var $this = $(this),
-        link = $('<a/>').attr('href', 'javascript:').addClass('see-less').text('see less'),
-        linkHolder = $('<li></li>').append(link);
-
-    $this.closest(_this.$ul).css('height', 'auto');
-
+    var $this = $(this);
+    $this.closest(_this.$ul).find('li.row:hidden').show();
     $this.closest(_this.$ul).html($this.closest(_this.$ul).find('li').sort(function(x, y) {
       return $(x).text() < $(y).text() ? -1 : 1;
     }));
 
-    linkHolder.appendTo($this.closest(_this.$ul));
-    $this.closest('li').hide();
+    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$ul));
   });
 }
 
@@ -62,20 +52,16 @@ PrioritySort.prototype.bindSeeLessLink = function () {
   var _this = this;
   _this.$ul.on('click', 'a.see-less', function () {
     var $this = $(this),
-        count = $this.closest(_this.$ul).attr('initial-items-count'),
-        link = $('<a/>').attr('href', 'javascript:').addClass('see-all').text('see all'),
-        linkHolder = $('<li></li>').append(link);
+        count = $this.closest(_this.$ul).attr('initial-items-count') - 1;
     
     _this.getInitiallySortedItems($this.closest(_this.$ul));
 
-    $this.closest(_this.$ul).height(_this.$liHeight * count);
-    linkHolder.insertAfter($this.closest(_this.$ul).find('li.row').eq(count - 1));
-
-    $this.remove();
+    $this.closest(_this.$ul).find('li.row:gt(' + count + ')').hide();
+    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$ul));
   });
 }
 
 $(function () {
-  var priority = new PrioritySort($('ul.priority-sort'), $('.row'));
+  var priority = new PrioritySort($('ul.priority-sort'));
   priority.initMethods();
 });
