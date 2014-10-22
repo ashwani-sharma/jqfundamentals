@@ -1,9 +1,9 @@
-var PrioritySort = function ($ul) {
-  this.$ul = $ul;
+var PrioritySort = function ($listContainer) {
+  this.$listContainer = $listContainer;
 }
 
 PrioritySort.prototype.initMethods = function () {
-  this.getInitiallySortedItems(this.$ul);
+  this.getInitiallySortedItems(this.$listContainer);
   this.displayLiCountWithLinks();
   this.bindEvents();
 }
@@ -18,12 +18,12 @@ PrioritySort.prototype.getInitiallySortedItems = function (block) {
 }
 
 PrioritySort.prototype.displayLiCountWithLinks = function () {
-  this.$ul.each(function () {
+  this.$listContainer.each(function () {
     var $this = $(this),
         count = $this.attr('initial-items-count') - 1,
         linkSee = $('<a/>').attr('href', 'javascript:').addClass('see-all').text('see all'),
         linkHide = $('<a/>').attr('href', 'javascript:').addClass('see-less').text('see less').hide(),
-        linkHolder = $('<li></li>').addClass('link-holder').append(linkSee, linkHide).appendTo($this);
+        linkHolder = $('<li/>').addClass('link-holder').append(linkSee, linkHide).appendTo($this);
 
     $this.find('li.row:gt(' + count + ')').hide();
   });
@@ -37,31 +37,31 @@ PrioritySort.prototype.bindEvents = function () {
 PrioritySort.prototype.bindSeeAllLink = function () {
   var _this = this;
 
-  _this.$ul.on('click', 'a.see-all', function () {
+  _this.$listContainer.on('click', 'a.see-all', function () {
     var $this = $(this);
-    $this.closest(_this.$ul).find('li.row:hidden').show();
-    $this.closest(_this.$ul).html($this.closest(_this.$ul).find('li').sort(function(x, y) {
+    $this.closest(_this.$listContainer).find('li.row:hidden').show();
+    $this.closest(_this.$listContainer).html($this.closest(_this.$listContainer).find('li').sort(function(x, y) {
       return $(x).text() < $(y).text() ? -1 : 1;
     }));
 
-    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$ul));
+    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$listContainer));
   });
 }
 
 PrioritySort.prototype.bindSeeLessLink = function () {
   var _this = this;
-  _this.$ul.on('click', 'a.see-less', function () {
+  _this.$listContainer.on('click', 'a.see-less', function () {
     var $this = $(this),
-        count = $this.closest(_this.$ul).attr('initial-items-count') - 1;
+        count = $this.closest(_this.$listContainer).attr('initial-items-count') - 1;
     
-    _this.getInitiallySortedItems($this.closest(_this.$ul));
+    _this.getInitiallySortedItems($this.closest(_this.$listContainer));
 
-    $this.closest(_this.$ul).find('li.row:gt(' + count + ')').hide();
-    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$ul));
+    $this.closest(_this.$listContainer).find('li.row:gt(' + count + ')').hide();
+    $this.hide().siblings().show().closest('li').appendTo($this.closest(_this.$listContainer));
   });
 }
 
 $(function () {
-  var priority = new PrioritySort($('ul.priority-sort'));
+  var priority = new PrioritySort($('.priority-sort'));
   priority.initMethods();
 });
