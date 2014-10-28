@@ -1,7 +1,7 @@
 var Lists = function (list_collection) {
   var _this = this;
   _this.listArray = [];
-  list_collection.each(function(index, list){
+  list_collection.each(function (index, list) {
     list = new List($(list));
     _this.listArray.push(list);
   });
@@ -12,7 +12,7 @@ Lists.prototype.init = function () {
   this.bindEvents();
 }
 
-Lists.prototype.displayInitiallySortedListItems = function() {
+Lists.prototype.displayInitiallySortedListItems = function () {
   this.listArray.forEach(function (list) {
     list.sortingByPriority();
     list.displayListItems();
