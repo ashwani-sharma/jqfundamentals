@@ -5,5 +5,5 @@ var ListItem = function (list_item_element) {
 }
 
 ListItem.prototype.getDom = function () {
-	return $('<li />').attr({'class': this.className, 'priority-order': this.priority}).text(this.text);
+  return $('<li />').attr({'class': this.className, 'priority-order': this.priority}).text(this.text);
 }

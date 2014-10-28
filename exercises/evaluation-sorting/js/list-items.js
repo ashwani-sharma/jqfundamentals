@@ -1,6 +1,6 @@
 var ListItems = function (list_items_selector) {
-	var _this = this;
-	_this.container = list_items_selector.closest('.priority-sort');
+  var _this = this;
+  _this.container = list_items_selector.closest('.priority-sort');
   _this.items = [];
   
   list_items_selector.each(function (index, list_item) {
@@ -19,19 +19,19 @@ ListItems.prototype.displayListItem = function () {
 
 ListItems.prototype.sortListItemsByPriority = function () {
   this.items.sort(function (a, b) {
-  	return a.priority - b.priority;
+    return a.priority - b.priority;
   });
 }
 
 ListItems.prototype.sortListItemsByAlphabet = function () {
   this.items.sort(function (a, b) {
-  	return a.text < b.text ? -1 : 1;
+    return a.text < b.text ? -1 : 1;
   });
 }
 
 ListItems.prototype.displayInitialListItems = function (count) {
-	this.container.find('.row:gt('+ count +')').hide();
-	this.createLink('see-all', 'see all');
+  this.container.find('.row:gt('+ count +')').hide();
+  this.createLink('see-all', 'see all');
 }
 
 ListItems.prototype.showAllListItems = function () {
@@ -41,5 +41,5 @@ ListItems.prototype.showAllListItems = function () {
 }
 
 ListItems.prototype.createLink = function (className, textNode) {
-	$('<a/>').attr({'href': 'javascript:', 'class': className }).text(textNode).appendTo(this.container);
+  $('<a/>').attr({'href': 'javascript:', 'class': className }).text(textNode).appendTo(this.container);
 }
