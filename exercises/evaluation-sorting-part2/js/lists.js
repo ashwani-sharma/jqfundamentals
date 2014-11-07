@@ -92,8 +92,8 @@ Lists.prototype.bindSeeAllLink = function (items, container, counter, list) {
 }
 
 Lists.prototype.bindSeeLessLink = function (items, container, counter, list) {
-  var initialListLength = Number(container.attr('initial-items-count')),
-      totalItems = items.length;
+  var totalItems = items.length,
+      initialListLength = Number(container.attr('initial-items-count'));
 
   container.on('click', '#see-less' + counter, function () {
     list.displayListItems(totalItems, initialListLength, 'see-all', counter);
