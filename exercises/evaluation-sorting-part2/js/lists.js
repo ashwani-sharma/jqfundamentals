@@ -51,7 +51,7 @@ Lists.prototype.makeAscendingButtonActive = function (counter, container) {
 
 Lists.prototype.displaySortedListItems = function (button, counter, container, list, items) {
   var _this = this,
-      className = button.attr('class')
+      className = button.attr('class');
 
   button.addClass('active').siblings('.' + className).removeClass('active');
 
@@ -65,9 +65,8 @@ Lists.prototype.displaySortedListItems = function (button, counter, container, l
 }
 
 Lists.prototype.appendCreatedListItems = function (counter, container, items) {
-  var _this = this;
-
-  var initialCount = Number(container.attr('initial-items-count')),
+  var _this = this,
+      initialCount = Number(container.attr('initial-items-count')),
       initialListLength = items.length;
 
   if (container.find('#see-less' + counter).length) {
