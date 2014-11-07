@@ -2,6 +2,7 @@ var ListItem = function (list_item_element) {
   this.className = list_item_element.attr('class');
   this.priority = Number(list_item_element.attr('priority-order'));
   this.text = list_item_element.text();
+  this.domListItem = this.getDom();
 }
 
 ListItem.prototype.getDom = function () {

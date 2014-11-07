@@ -22,29 +22,29 @@ body {
   width: 200px;
 }
 
-.lists .row {
+.lists li {
   float: left;
   margin-top: 4px;
   text-transform: lowercase;
   width: 100%;
 }
 
-#buttons {
+.sort-buttons-container {
   overflow: hidden;
 }
 
-#buttons .button {
+.sort-buttons-container input[type='button'] {
   background: #000;
   border: none;
   color: #fff;
   cursor: pointer;
   font-size: 15px;
   height: 30px;
-  margin: 0 10px 20px 0;
+  margin: 0 10px 10px 0;
   padding: 0 10px;
 }
 
-#buttons .button.active {
+.sort-buttons-container input[type='button'].active {
   background: #ff0000;
   pointer-events: none;
 }
