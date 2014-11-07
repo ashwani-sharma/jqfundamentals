@@ -61,62 +61,44 @@ Lists.prototype.displaySortedListItems = function (button, counter, container, l
       order = Number(_this.sortOrder[container.find(orderSelector).val()]);
 
   list.sortedListItems(type, order);
-  _this.appendCreatedListItems(counter, container, items);
+  _this.appendCreatedListItems(counter, container, items, list);
 }
 
-Lists.prototype.appendCreatedListItems = function (counter, container, items) {
+Lists.prototype.appendCreatedListItems = function (counter, container, items, list) {
   var _this = this,
       initialCount = Number(container.attr('initial-items-count')),
       initialListLength = items.length;
 
   if (container.find('#see-less' + counter).length) {
-    _this.displayListItems(items.length, initialListLength, 'see-less', items, container, counter);
+    list.displayListItems(items.length, initialListLength, 'see-less', counter);
   }
   else {
-    _this.displayListItems(initialListLength, initialCount, 'see-all', items, container, counter);
+    list.displayListItems(initialListLength, initialCount, 'see-all', counter);
   }
-}
-
-Lists.prototype.displayListItems = function (listItemsLength, listCondition, link, items, container, counter) {
-  this.appendListItems(listItemsLength, listCondition, items, container);
-  this.createAndDisplayLastLink(link, counter, container);
-}
-
-Lists.prototype.appendListItems = function (length, condition, items, container) {
-  container.find('li').remove();
-  for (var i = 0, len = length; i < len; i++) {
-    if (i < condition) {
-      items[i].domListItem.appendTo(container);
-    }
-  }
-}
-
-Lists.prototype.createAndDisplayLastLink = function (textNode, counter, container) {
-  $('<li/>').attr({'class': 'last', 'id': textNode + counter}).append($('<a/>').attr({'href': 'javascript:', 'class': 'link'}).text(textNode)).appendTo(container);
 }
 
 Lists.prototype.bindEvents = function (items, container, counter, list) {
-  this.bindSeeAllLink(items, container, counter);
-  this.bindSeeLessLink(items, container, counter);
+  this.bindSeeAllLink(items, container, counter, list);
+  this.bindSeeLessLink(items, container, counter, list);
   this.bindSortingButtons(items, container, counter, list);
 }
 
-Lists.prototype.bindSeeAllLink = function (items, container, counter) {
+Lists.prototype.bindSeeAllLink = function (items, container, counter, list) {
   var _this = this,
       totalItems = items.length;
 
   container.on('click', '#see-all' + counter, function () {
-    _this.displayListItems(totalItems, totalItems, 'see-less', items, container, counter);
+    list.displayListItems(totalItems, totalItems, 'see-less', counter);
   });
 }
 
-Lists.prototype.bindSeeLessLink = function (items, container, counter) {
+Lists.prototype.bindSeeLessLink = function (items, container, counter, list) {
   var _this = this,
       initialListLength = Number(container.attr('initial-items-count')),
       totalItems = items.length;
 
   container.on('click', '#see-less' + counter, function () {
-    _this.displayListItems(initialListLength, totalItems, 'see-all', items, container, counter);
+    list.displayListItems(totalItems, initialListLength, 'see-all', counter);
   });
 }
 

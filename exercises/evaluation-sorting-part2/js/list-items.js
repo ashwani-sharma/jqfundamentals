@@ -9,12 +9,18 @@ var ListItems = function (list_items_selector) {
   });
 }
 
-ListItems.prototype.displayListItem = function () { 
-  var _this = this;
+ListItems.prototype.displayListItem = function (length, condition, textNode, counter) { 
+  var _this = this,
+      i = 0;
   _this.container.find('li').remove();
   _this.items.forEach(function (item) {
-    _this.container.append(item.getDom());
+    if(i < condition) {
+      _this.container.append(item.getDom());
+    }
+    i++
   });
+  length = i;
+  _this.createAndDisplayLastLink(textNode, counter)
 }
 
 ListItems.prototype.sortedListItems = function (type, order) {
@@ -34,4 +40,8 @@ ListItems.prototype.sortedListItems = function (type, order) {
       return 0;
     }
   }
+}
+
+ListItems.prototype.createAndDisplayLastLink = function (textNode, counter) {
+  $('<li/>').attr({'class': 'last', 'id': textNode + counter}).append($('<a/>').attr({'href': 'javascript:', 'class': 'link'}).text(textNode)).appendTo(this.container);
 }
