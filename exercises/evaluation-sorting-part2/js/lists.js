@@ -84,8 +84,7 @@ Lists.prototype.bindEvents = function (items, container, counter, list) {
 }
 
 Lists.prototype.bindSeeAllLink = function (items, container, counter, list) {
-  var _this = this,
-      totalItems = items.length;
+  var totalItems = items.length;
 
   container.on('click', '#see-all' + counter, function () {
     list.displayListItems(totalItems, totalItems, 'see-less', counter);
@@ -93,8 +92,7 @@ Lists.prototype.bindSeeAllLink = function (items, container, counter, list) {
 }
 
 Lists.prototype.bindSeeLessLink = function (items, container, counter, list) {
-  var _this = this,
-      initialListLength = Number(container.attr('initial-items-count')),
+  var initialListLength = Number(container.attr('initial-items-count')),
       totalItems = items.length;
 
   container.on('click', '#see-less' + counter, function () {
