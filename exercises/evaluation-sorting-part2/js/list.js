@@ -9,7 +9,3 @@ List.prototype.displayListItems = function(length, condition, textNode, counter)
 List.prototype.sortedListItems = function (type, order) {
 	this.list_items.sortedListItems(type, order);
 }
-
-List.prototype.createAndDisplayLastLink = function (textNode, counter) {
-  this.createAndDisplayLastLink(textNode, counter);
-}
