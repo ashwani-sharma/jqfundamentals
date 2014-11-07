@@ -1,6 +1,6 @@
 var Lists = function (list_collection) {
-  this.sortType = {'Alphabetic-Sort': 'text', 'Priority-Sort': 'priority'};
-  this.sortOrder = {'Ascending': 0, 'Descending': 1};
+  this.sortType = {'alphabetic-sort': 'text', 'priority-sort': 'priority'};
+  this.sortOrder = {'ascending': 0, 'descending': 1};
   this.listArray = [];
 
   var _this = this;
@@ -15,7 +15,7 @@ Lists.prototype.init = function () {
       counter = 0;
 
   _this.listArray.forEach(function (list) {
-    var priorityButton = '#Priority-Sort' + counter,
+    var priorityButton = '#priority-sort' + counter,
         list = list,
         items = list.list_items.items,
         container = list.list_items.container;
@@ -46,7 +46,7 @@ Lists.prototype.createSortingButtons = function (className, buttons, counter) {
 }
 
 Lists.prototype.makeAscendingButtonActive = function (counter, container) {
-  container.find('#Ascending' + counter).addClass('active');
+  container.find('#ascending' + counter).addClass('active');
 }
 
 Lists.prototype.displaySortedListItems = function (button, counter, container, list, items) {
