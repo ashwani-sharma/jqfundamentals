@@ -70,7 +70,7 @@ Lists.prototype.appendCreatedListItems = function (counter, container, items, li
       initialListLength = items.length;
 
   if (container.find('#see-less' + counter).length) {
-    list.displayListItems(items.length, initialListLength, 'see-less', counter);
+    list.displayListItems(initialListLength, initialListLength, 'see-less', counter);
   }
   else {
     list.displayListItems(initialListLength, initialCount, 'see-all', counter);
