@@ -12,6 +12,7 @@ var ListItems = function (list_items_selector) {
 ListItems.prototype.displayListItem = function (length, condition, textNode, counter) { 
   var _this = this,
       i = 0;
+      
   _this.container.find('li').remove();
   _this.items.forEach(function (item) {
     if(i < condition) {
@@ -19,7 +20,6 @@ ListItems.prototype.displayListItem = function (length, condition, textNode, cou
     }
     i++
   });
-  length = i;
   _this.createAndDisplayLastLink(textNode, counter)
 }
 
