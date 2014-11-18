@@ -76,7 +76,7 @@ List.prototype.appendCreatedListItems = function (items, list) {
   }
 }
 
-List.prototype.displayListItems = function (condition, html) {
+List.prototype.displayListItems = function (condition, buttonHtml) {
   var _this = this,
       i = 0;
       
@@ -87,11 +87,11 @@ List.prototype.displayListItems = function (condition, html) {
     }
     i++
   });
-  _this.createAndDisplayLastLink(html);
+  _this.createAndDisplayLastLink(buttonHtml);
 }
 
-List.prototype.createAndDisplayLastLink = function (html) {
-  $('<li/>').addClass(html).append($('<a/>').attr('href', 'javascript:').text(html)).appendTo(this.container);
+List.prototype.createAndDisplayLastLink = function (buttonHtml) {
+  $('<li/>').addClass(buttonHtml).append($('<a/>').attr('href', 'javascript:').text(buttonHtml)).appendTo(this.container);
 }
 
 List.prototype.bindEvents = function (items, list) {
