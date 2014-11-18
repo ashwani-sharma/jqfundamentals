@@ -69,14 +69,14 @@ List.prototype.appendCreatedListItems = function (items, list) {
       initialListLength = items.length;
 
   if (_this.container.find($('.' + _this.seeLess)).length) {
-    _this.displayListItems(initialListLength, _this.seeLess, _this.seeLess);
+    _this.displayListItems(initialListLength, _this.seeLess);
   }
   else {
-    _this.displayListItems(_this.initialCount, _this.seeAll, _this.seeAll);
+    _this.displayListItems(_this.initialCount, _this.seeAll);
   }
 }
 
-List.prototype.displayListItems = function (condition, textNode, className) {
+List.prototype.displayListItems = function (condition, html) {
   var _this = this,
       i = 0;
       
@@ -87,11 +87,11 @@ List.prototype.displayListItems = function (condition, textNode, className) {
     }
     i++
   });
-  _this.createAndDisplayLastLink(textNode, className);
+  _this.createAndDisplayLastLink(html);
 }
 
-List.prototype.createAndDisplayLastLink = function (textNode, className) {
-  $('<li/>').addClass(className).append($('<a/>').attr('href', 'javascript:').text(textNode)).appendTo(this.container);
+List.prototype.createAndDisplayLastLink = function (html) {
+  $('<li/>').addClass(html).append($('<a/>').attr('href', 'javascript:').text(html)).appendTo(this.container);
 }
 
 List.prototype.bindEvents = function (items, list) {
@@ -105,14 +105,14 @@ List.prototype.bindSeeAllLink = function (items) {
       totalItems = items.length;
 
   _this.container.on('click', '.' + _this.seeAll, function () {
-    _this.displayListItems(totalItems, _this.seeLess, _this.seeLess);
+    _this.displayListItems(totalItems, _this.seeLess);
   });
 }
 
 List.prototype.bindSeeLessLink = function (items) {
   var _this = this;
   _this.container.on('click', '.' + _this.seeLess, function () {
-    _this.displayListItems(_this.initialCount, _this.seeAll, _this.seeAll);
+    _this.displayListItems(_this.initialCount, _this.seeAll);
   });
 }
 
