@@ -12,8 +12,8 @@ var List = function (dom_element, list_items_selector) {
 
   var _this = this;
 
-  dom_element.each(function (index, dom_item, container, sortType, sortOrder) {
-    dom_item = new Buttons(container, sortType, sortOrder);
+  dom_element.each(function (container, sortType, sortOrder) {
+    var dom_item = new Buttons(container, sortType, sortOrder);
     _this.allButtons.push(dom_item);
   });
 
