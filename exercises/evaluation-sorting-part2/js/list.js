@@ -110,9 +110,7 @@ List.prototype.bindSeeAllLink = function (items) {
 }
 
 List.prototype.bindSeeLessLink = function (items) {
-  var _this = this,
-      totalItems = items.length;
-
+  var _this = this;
   _this.container.on('click', '.' + _this.seeLess, function () {
     _this.displayListItems(_this.initialCount, _this.seeAll, _this.seeAll);
   });
