@@ -69,14 +69,14 @@ List.prototype.appendCreatedListItems = function (items, list) {
       initialListLength = items.length;
 
   if (_this.container.find($('.' + _this.seeLess)).length) {
-    _this.displayListItems(initialListLength, initialListLength, _this.seeLess, _this.seeLess);
+    _this.displayListItems(initialListLength, _this.seeLess, _this.seeLess);
   }
   else {
-    _this.displayListItems(initialListLength, _this.initialCount, _this.seeAll, _this.seeAll);
+    _this.displayListItems(_this.initialCount, _this.seeAll, _this.seeAll);
   }
 }
 
-List.prototype.displayListItems = function (length, condition, textNode, className) {
+List.prototype.displayListItems = function (condition, textNode, className) {
   var _this = this,
       i = 0;
       
@@ -105,7 +105,7 @@ List.prototype.bindSeeAllLink = function (items) {
       totalItems = items.length;
 
   _this.container.on('click', '.' + _this.seeAll, function () {
-    _this.displayListItems(totalItems, totalItems, _this.seeLess, _this.seeLess);
+    _this.displayListItems(totalItems, _this.seeLess, _this.seeLess);
   });
 }
 
@@ -114,7 +114,7 @@ List.prototype.bindSeeLessLink = function (items) {
       totalItems = items.length;
 
   _this.container.on('click', '.' + _this.seeLess, function () {
-    _this.displayListItems(totalItems, _this.initialCount, _this.seeAll, _this.seeAll);
+    _this.displayListItems(_this.initialCount, _this.seeAll, _this.seeAll);
   });
 }
 

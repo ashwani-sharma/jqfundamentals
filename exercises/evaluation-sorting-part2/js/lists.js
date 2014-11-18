@@ -12,7 +12,7 @@ var Lists = function (list_collection) {
 Lists.prototype.init = function () {
   this.listArray.forEach(function (list) {
     var list = list,
-        items = list.items;
+        items = list.items,
         container = list.container;
 
     list.buttons();
