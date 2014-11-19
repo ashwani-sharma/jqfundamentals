@@ -1,8 +1,9 @@
-var List = function (dom_element, list_items_selector) {
-  this.container = list_items_selector.closest('.priority-sort');
+var List = function (dom_element) {
+  this.listItems = dom_element.find('.row');
+  this.container = this.listItems.closest('.priority-sort');
   this.initialCount = Number(this.container.attr('initial-items-count'));
-  this.sortType = {'alphabetic-sort': 'text', 'priority-sort': 'priority'};
-  this.sortOrder = {'ascending': 0, 'descending': 1};
+  this.sortTypes = {'alphabetic-sort': 'text', 'priority-sort': 'priority'};
+  this.sortOrders = {'ascending': 0, 'descending': 1};
   this.buttonType = '.sorting-type';
   this.buttonOrder = '.sorting-order';
   this.seeAll = 'see-all';
@@ -10,39 +11,30 @@ var List = function (dom_element, list_items_selector) {
   this.allButtons = [];
   this.items = [];
 
+  this.buttons = new Buttons(this.container, this.sortTypes, this.sortOrders);
+  this.allButtons.push(this.buttons);
+
   var _this = this;
-
-  dom_element.each(function (container, sortType, sortOrder) {
-    var dom_item = new Buttons(container, sortType, sortOrder);
-    _this.allButtons.push(dom_item);
-  });
-
-  list_items_selector.each(function (index, list_item) {
+  _this.listItems.each(function (index, list_item) {
     list_item = new ListItem($(list_item));
     _this.items.push(list_item);
   });
 }
 
-List.prototype.buttons = function () {
+List.prototype.displaySortingButtons = function () {
   var _this = this;
-  _this.allButtons.forEach(function (item) {
-    item.displayAllSortingButtons(_this.container, _this.sortType, _this.sortOrder);
+  _this.allButtons.forEach(function (button) {
+    button.displayAllSortingButtons(_this.container, _this.sortTypes, _this.sortOrders);
   });
 }
 
-List.prototype.displaySortedListItems = function (button, list, items) {
+List.prototype.displaySortedListItems = function () {
   var _this = this,
-      className = button.attr('class');
+      type = _this.sortTypes[_this.container.find(_this.buttonType + '.active').val()],
+      order = Number(_this.sortOrders[_this.container.find(_this.buttonOrder + '.active').val()]);
 
-  button.addClass('active').siblings('.' + className).removeClass('active');
-
-  var typeSelector = _this.buttonType + '.active',
-      orderSelector = _this.buttonOrder + '.active',
-      type = _this.sortType[_this.container.find(typeSelector).val()],
-      order = Number(_this.sortOrder[_this.container.find(orderSelector).val()]);
-      
   _this.sortedListItems(type, order);
-  _this.appendCreatedListItems(items, list);
+  _this.appendCreatedListItems();
 }
 
 List.prototype.sortedListItems = function (type, order) {
@@ -64,9 +56,9 @@ List.prototype.sortedListItems = function (type, order) {
   }
 }
 
-List.prototype.appendCreatedListItems = function (items, list) {
+List.prototype.appendCreatedListItems = function () {
   var _this = this,
-      initialListLength = items.length;
+      initialListLength = _this.items.length;
 
   if (_this.container.find($('.' + _this.seeLess)).length) {
     _this.displayListItems(initialListLength, _this.seeLess);
@@ -94,31 +86,33 @@ List.prototype.createAndDisplayLastLink = function (buttonHtml) {
   $('<li/>').addClass(buttonHtml).append($('<a/>').attr('href', 'javascript:').text(buttonHtml)).appendTo(this.container);
 }
 
-List.prototype.bindEvents = function (items, list) {
-  this.bindSeeAllLink(items);
-  this.bindSeeLessLink(items);
-  this.bindSortingButtons(items, list);
+List.prototype.bindEvents = function () {
+  this.bindSeeAllLink();
+  this.bindSeeLessLink();
+  this.bindSortingButtons();
 }
 
-List.prototype.bindSeeAllLink = function (items) {
-  var _this = this,
-      totalItems = items.length;
-
+List.prototype.bindSeeAllLink = function () {
+  var _this = this;
   _this.container.on('click', '.' + _this.seeAll, function () {
-    _this.displayListItems(totalItems, _this.seeLess);
+    _this.displayListItems(_this.items.length, _this.seeLess);
   });
 }
 
-List.prototype.bindSeeLessLink = function (items) {
+List.prototype.bindSeeLessLink = function () {
   var _this = this;
   _this.container.on('click', '.' + _this.seeLess, function () {
     _this.displayListItems(_this.initialCount, _this.seeAll);
   });
 }
 
-List.prototype.bindSortingButtons = function (items, list) {
+List.prototype.bindSortingButtons = function () {
   var _this = this;
   _this.container.on('click', _this.buttonType + ',' + _this.buttonOrder , function () {
-    _this.displaySortedListItems($(this), list, items);
+    var $this = $(this),
+        className = $this.attr('class');
+
+    $this.addClass('active').siblings('.' + className).removeClass('active');
+    _this.displaySortedListItems();
   });
 }

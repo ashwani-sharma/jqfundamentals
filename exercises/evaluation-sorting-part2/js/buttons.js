@@ -7,7 +7,7 @@ Buttons.prototype.displayAllSortingButtons = function (container, sortType, sort
       $orderButtons = _this.createSortingButtons('sorting-order', sortOrder);
 
   $sortButtonsContainer.append($typeButtons, $orderButtons);
-  _this.makeAscendingButtonActive(container);
+  _this.makePriorityAndAscendingButtonsActive(container);
 }
 
 Buttons.prototype.createSortingButtons = function (className, buttons) {
@@ -18,6 +18,7 @@ Buttons.prototype.createSortingButtons = function (className, buttons) {
   return sortButtons;
 }
 
-Buttons.prototype.makeAscendingButtonActive = function (container) {
+Buttons.prototype.makePriorityAndAscendingButtonsActive = function (container) {
+  container.find($('input[data-id="priority-sort"]')).addClass('active');
   container.find($('input[data-id="ascending"]')).addClass('active');
 }
