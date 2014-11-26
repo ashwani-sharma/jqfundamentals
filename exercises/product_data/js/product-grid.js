@@ -43,11 +43,6 @@ ProductGrid.prototype.bindEvent = function () {
   });
 }
 
-ProductGrid.prototype.showFilteredProducts = function (filteredProducts) {
-  $('span.box').hide();
-  $(filteredProducts).show();
-}
-
 ProductGrid.prototype.filteredData = function () {
   var _this = this,
       $holder = _this.filterHolder,
@@ -82,6 +77,11 @@ ProductGrid.prototype.getFilteredProducts = function (elem, holder) {
   else {
     return elem;
   }
+}
+
+ProductGrid.prototype.showFilteredProducts = function (filteredProducts) {
+  $('span.box').hide();
+  $(filteredProducts).show();
 }
 
 $(function () {

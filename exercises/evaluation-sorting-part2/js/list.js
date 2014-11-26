@@ -11,6 +11,9 @@ var List = function (dom_element) {
   this.allButtons = [];
   this.items = [];
 
+  this.sortBy = this.sortTypes['priority-sort'];
+  this.sortOrder = this.sortTypes['ascending'];
+
   this.buttons = new Buttons(this.container, this.sortTypes, this.sortOrders);
   this.allButtons.push(this.buttons);
 
